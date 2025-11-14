@@ -31,6 +31,13 @@ jobs:
         run: npm run build
         continue-on-error: true
 
+      - name: Start xvfb
+        run: |
+          sudo apt-get update
+          sudo apt-get install xvfb -y
+          export DISPLAY=:99
+          Xvfb :99 -screen 0 1280x1024x24 &
+
       - name: Run Playwright tests
         run: npx playwright test
 
